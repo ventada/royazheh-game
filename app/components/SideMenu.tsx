@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import {
   IconX,
@@ -13,6 +13,7 @@ import {
   IconLogin,
   IconLogout,
   IconChevronLeft,
+  IconBook,
 } from "@tabler/icons-react";
 import { CATEGORIES } from "../types";
 
@@ -31,6 +32,17 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
       onClose();
     }
   };
+
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      const original = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = original;
+      };
+    }
+  }, [isOpen]);
 
   return (
     <>
@@ -100,6 +112,15 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
                 >
                   <IconSearch size={20} className="ml-3" />
                   جستجو و کاوش
+                </Link>
+
+                <Link
+                  href="/blog"
+                  onClick={onClose}
+                  className="flex items-center px-3 py-3 text-[var(--text-primary)] hover:bg-gray-700 rounded-xl transition-colors"
+                >
+                  <IconBook size={20} className="ml-3" />
+                  وبلاگ
                 </Link>
 
                 <Link
