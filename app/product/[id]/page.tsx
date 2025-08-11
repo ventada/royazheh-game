@@ -6,6 +6,7 @@ import Image from "next/image";
 import TopBar from "../../components/TopBar";
 import ProductCard from "../../components/ProductCard";
 import { MOCK_PRODUCTS } from "../../lib/mockData";
+import ProductComments from "../../components/ProductComments";
 import { useCart } from "../../context/CartContext";
 import {
   IconShoppingCart,
@@ -308,6 +309,9 @@ export default function ProductPage() {
           </div>
         )}
       </div>
+
+      {/* Comments */}
+      <ProductComments productId={product.id} />
     </div>
   );
 }
